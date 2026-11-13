@@ -44,7 +44,8 @@ Check what it produces. In particular, check that problem sets sit after the lec
 | Path | Purpose |
 |---|---|
 | `index.html` | The whole app. Contains no course data. |
-| `config.json` | Site title and default pace. |
+| `config.json` | Site title, default pace, optional home link and item types. |
+| `custom.css` | Your theme. Empty in the template. |
 | `courses/index.json` | The course files to load, in tab order. Empty in the template. |
 | `courses/*.json` | One file per course. |
 | `examples/courses/` | Two complete example course files. |
@@ -125,9 +126,19 @@ Define more under `types` in `config.json` (for every course) or in a course fil
 | `verb`, `done` | For `tick` types: the link text ("Watch") and the past tense ("watched"). |
 | `open` | For `assess` types: the link text ("Open brief"). |
 
+## Theming
+
+Put your look in `custom.css`, not in `index.html`. The page loads `custom.css` after its own styles, and template updates never overwrite it, so a restyled copy still takes code updates cleanly.
+
+- **Colours and fonts** are CSS variables. `custom.css` lists them with an example. Override the ones you want.
+- **Light and dark:** the built-in theme follows the visitor's system setting. To use one palette always, set it on all three selectors shown in `custom.css`.
+- **Web fonts:** the template loads none. You can `@import` them at the top of `custom.css`; note that this makes visitors' browsers contact the font host.
+- **A link back to your own site:** set `"home": {"label": "My site", "url": "https://example.org/"}` in `config.json` and it appears above the title.
+- **Title:** `"title"` in `config.json`.
+
 ## Updating from the template
 
-Your copy differs from the template in two ways. Your data (`courses/`, `state.json`, `config.json`) is meant to differ and never needs syncing. The code (`index.html`, `tests/`) is what can fall behind.
+Your copy differs from the template in two ways. Your data and look (`courses/`, `state.json`, `config.json`, `custom.css`) are meant to differ and never needs syncing. The code (`index.html`, `tests/`) is what can fall behind.
 
 To pull in newer code without touching your data:
 

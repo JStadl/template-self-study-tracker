@@ -1,0 +1,25 @@
+/*
+  Your theme. This file is yours: template updates never overwrite it.
+
+  The tracker's colours and fonts are CSS variables. Override them here, for example:
+
+  :root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
+    color-scheme: light;            (use one palette in both light and dark mode)
+    --bg: #faf8f5;                  page background
+    --surface: #ffffff;             cards and lists
+    --ink: #2d2a24;                 text
+    --muted: #6b6560;               secondary text
+    --line: #ddd6cc;                borders
+    --accent: #c05030;              buttons, links, progress, done marks
+    --accent-ink: #ffffff;          text on the accent colour
+    --tint: #f0ece6;                assessment rows, progress track
+    --good: #2c7a45; --warn: #a86200; --crit: #b3261e;   status colours
+    --display: Georgia, serif;      headings
+    --body: system-ui, sans-serif;  everything else
+    --mono: ui-monospace, monospace;
+  }
+
+  Listing all three selectors makes your palette apply in light and dark mode. To keep a separate dark
+  palette, put light values under :root and dark values under the other two selectors.
+  Any other CSS works here too. See "Theming" in README.md.
+*/

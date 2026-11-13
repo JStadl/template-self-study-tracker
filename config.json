@@ -1,5 +1,9 @@
 {
  "title": "Self-Study Tracker",
  "defaultPace": 5,
+ "home": {
+  "label": "",
+  "url": ""
+ },
  "types": {}
 }
