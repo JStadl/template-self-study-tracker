@@ -156,6 +156,33 @@ To keep updates painless:
 - Every save triggers a Pages rebuild. GitHub applies a soft limit on builds per hour, which a normal study session will not reach.
 - Your marks and skipped items are visible to anyone who can see the site.
 
+## Security model
+
+Read this before relying on the tracker for anything that matters.
+
+**What protects your tracker.** Saving means committing to your repository, and GitHub refuses that without a token that has write access. The page cannot grant a visitor that power. Hiding the buttons in the read-only view is a courtesy, not the lock.
+
+**What the token can do.** With the recommended scope it can change any file in this one repository, including the site's own code, and nothing else on your account. Changes appear in the commit history and the token can be revoked on GitHub at any time.
+
+**Where the token is.** In the local storage of each browser you sign in on. It is sent only to `api.github.com` and never written to the repository.
+
+**How it could be stolen.**
+
+- Another site on the same address. Every GitHub Pages site you own shares `<you>.github.io`, and browsers share local storage across an address. A script on another of your Pages sites, including third-party widgets you add there, can read the token. If you host other things on Pages, serve the tracker from its own address (a custom subdomain or a separate GitHub organisation).
+- Malware, a malicious browser extension, or someone using your unlocked browser.
+- Code you add without reading it: an update to `index.html`, or a change made by a tool or person you do not trust.
+
+**What the code does about hostile data.** Course files and `config.json` are treated as untrusted. Links must be `http` or `https`, ids and numbers are checked when a file loads, and every value is escaped where it is written into the page. `tests/smoke.js` loads a hostile course file and fails if any of it reaches the page as markup. This means no known injection route, not a proof that none exists.
+
+**Sensible precautions.**
+
+- Use a fine-grained token limited to this repository, with Contents read and write only, and a short expiry.
+- Add a branch rule that blocks force-pushes, so history cannot be rewritten.
+- Sign in only on devices you trust, and sign out on the Plan tab when you stop using one.
+- Read course files and code changes you did not write before committing them.
+
+**Who should not use this design.** Anyone who needs several editors, real accounts, or protection for something valuable. A long-lived token held in a browser is a reasonable trade for a personal study tracker and the wrong one for anything more. That needs a small server that signs users in and holds short-lived credentials.
+
 ## Run it locally
 
 ```
